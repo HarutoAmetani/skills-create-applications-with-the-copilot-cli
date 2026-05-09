@@ -26,7 +26,7 @@ describe('calculator core', () => {
   })
 
   test('invalid operation throws', () => {
-    expect(() => calculate('pow', 2, 3)).toThrow(/Unknown operation/)
+    expect(() => calculate('powr', 2, 3)).toThrow(/Unknown operation/)
   })
 
   test('toNumber rejects non-number input', () => {
@@ -36,5 +36,29 @@ describe('calculator core', () => {
   test('works with floats and negatives', () => {
     expect(calculate('+', -1.5, 2.25)).toBeCloseTo(0.75)
     expect(calculate('/', 7.5, 2.5)).toBeCloseTo(3)
+  })
+
+  // New operation tests
+  test('modulo: 10 % 3 = 1', () => {
+    expect(calculate('%', 10, 3)).toBe(1)
+    expect(calculate('mod', 10, 3)).toBe(1)
+  })
+
+  test('modulo by zero throws', () => {
+    expect(() => calculate('%', 5, 0)).toThrow(/Modulo by zero/)
+  })
+
+  test('power: 2 ^ 8 = 256', () => {
+    expect(calculate('^', 2, 8)).toBe(256)
+    expect(calculate('pow', 2, 8)).toBe(256)
+    expect(calculate('**', 2, 8)).toBe(256)
+  })
+
+  test('square root: sqrt 9 = 3', () => {
+    expect(calculate('sqrt', 9)).toBe(3)
+  })
+
+  test('square root of negative throws', () => {
+    expect(() => calculate('sqrt', -4)).toThrow(/Square root of negative number/)
   })
 })
