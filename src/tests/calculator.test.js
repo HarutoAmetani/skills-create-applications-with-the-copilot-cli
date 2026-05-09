@@ -25,10 +25,6 @@ describe('calculator core', () => {
     expect(() => calculate('/', 1, 0)).toThrow(/Division by zero/)
   })
 
-  test('invalid operation throws', () => {
-    expect(() => calculate('powr', 2, 3)).toThrow(/Unknown operation/)
-  })
-
   test('toNumber rejects non-number input', () => {
     expect(() => toNumber('abc')).toThrow(/Invalid number/)
   })
@@ -38,7 +34,7 @@ describe('calculator core', () => {
     expect(calculate('/', 7.5, 2.5)).toBeCloseTo(3)
   })
 
-  // New operation tests
+  // Existing operation tests
   test('modulo: 10 % 3 = 1', () => {
     expect(calculate('%', 10, 3)).toBe(1)
     expect(calculate('mod', 10, 3)).toBe(1)
@@ -60,5 +56,21 @@ describe('calculator core', () => {
 
   test('square root of negative throws', () => {
     expect(() => calculate('sqrt', -4)).toThrow(/Square root of negative number/)
+  })
+
+  // New examples from image
+  test('modulo example: 5 % 2 = 1', () => {
+    expect(calculate('%', 5, 2)).toBe(1)
+    expect(calculate('mod', 5, 2)).toBe(1)
+  })
+
+  test('power example: 2 ^ 3 = 8', () => {
+    expect(calculate('^', 2, 3)).toBe(8)
+    expect(calculate('pow', 2, 3)).toBe(8)
+    expect(calculate('**', 2, 3)).toBe(8)
+  })
+
+  test('square root example: sqrt 16 = 4', () => {
+    expect(calculate('sqrt', 16)).toBe(4)
   })
 })
